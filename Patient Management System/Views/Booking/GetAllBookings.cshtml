@@ -1,0 +1,118 @@
+﻿@model IEnumerable<Booking>
+
+@{
+    ViewData["Title"] = "GetAllBookings";
+    Layout = "~/Views/Booking/_Layout.cshtml";
+}
+
+<style>
+    .table {
+        width: 100%;
+        margin-bottom: 1rem;
+        color: #212529;
+    }
+
+    thead th {
+        vertical-align: bottom;
+        border-bottom: 2px solid #dee2e6;
+        background-color: #f8f9fa;
+    }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: rgba(0,0,0,.05);
+    }
+
+    .table-hover tbody tr:hover {
+        color: #212529;
+        background-color: rgba(0,0,0,.075);
+    }
+
+    .btn {
+        margin: 4px;
+        padding: 8px 16px;
+        font-size: 16px; /* Increased font size for readability */
+    }
+
+    .btn-primary, .btn-info, .btn-danger {
+        color: #fff;
+    }
+
+        .btn-primary:hover, .btn-info:hover, .btn-danger:hover {
+            opacity: 0.85; /* Subtle change for hover effect */
+        }
+</style>
+
+@if (ViewBag.error != null)
+{
+    <div class="alert alert-info" role="alert">
+        No bookings found!
+    </div>
+
+    <a class="btn btn-primary" asp-area="" asp-controller="Booking" asp-action="GetAllBookings">Go back</a>
+}
+
+else
+{
+    <h2>GetAllBookings</h2>
+    <hr />
+
+    <form asp-action="GetPatientBookings" asp-controller="Booking" method="get">
+        <p>
+            <label for="lastName">Search Patient:</label>
+            <input type="text" id="lastName" name="lastName" placeholder="Enter patient's last name">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </p>
+    </form>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AppointmentType)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BookingDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.StartTime)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EndTime)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Patient.Fullname)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AppointmentType)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BookingDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StartTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EndTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Patient.Fullname)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-info">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.ID" class="btn btn-primary">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

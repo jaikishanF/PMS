@@ -1,0 +1,99 @@
+﻿@model ApplicationUser
+
+@{
+    ViewData["Title"] = "Details of Patient";
+}
+
+@if (ViewBag.error != null)
+{
+    <div class="alert alert-info" role="alert">
+        Patient not found. Please select a different patient.
+    </div>
+
+    <a class="btn btn-primary" asp-area="" asp-controller="Admin" asp-action="Patients">Go back</a>
+}
+else
+{
+    <h2>Details of @Model.Fullname</h2>
+    <hr />
+
+    <div class="container">
+        <form>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">First name</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value="@Model.FirstName" readonly>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Last name</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value="@Model.LastName" readonly>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Date of birth</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value="@Model.DateOfBirth.ToString("dd-MM-yyyy")" readonly>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Phone number</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value="@Model.PhoneNumber" readonly>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Street name and number</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value="@Model.StreetNameAndNumber" readonly>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">City</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value="@Model.City" readonly>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Postal code</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value="@Model.PostalCode" readonly>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Country</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value="@Model.Country" readonly>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Emergency name</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value="@Model.EmergencyDetails.EmergencyName" readonly>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Emergency phone number</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value="@Model.EmergencyDetails.PhoneNumber" readonly>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Provider</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value="@Model.InsuranceDetails.Provider" readonly>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Policy number</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" value="@Model.InsuranceDetails.PolicyNumber" readonly>
+                </div>
+            </div>
+        </form>
+    </div>
+    <br />
+    <a class="btn btn-primary" asp-area="" asp-controller="Admin" asp-action="Patients">Go back</a>
+}
+

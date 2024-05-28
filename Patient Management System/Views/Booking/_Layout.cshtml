@@ -1,0 +1,45 @@
+﻿@{
+    Layout = "/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card login-logout-tab shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-action="Index" asp-controller="Booking">Create Booking</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-action="GetAllBookings" asp-controller="Booking">Bookings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" asp-action="Index" asp-controller="BookingAvailabilities">Availabilities</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body">
+                <div class="col-md-12 mt-3">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+    <script>
+        $(function () {
+            var current = location.pathname.toLowerCase().replace(/\/$/, '');
+            $('.nav-tabs li a').each(function () {
+                var $this = $(this);
+                var href = $this.attr('href').toLowerCase().replace(/\/$/, '');
+                if (current === href || current.includes(href)) {
+                    $('.nav-tabs li a').removeClass('active');
+                    $this.addClass('active');
+                }
+            });
+        });
+    </script>
+}
